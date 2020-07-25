@@ -8,15 +8,16 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
 
-inputs:
-  numOctocats:
-    description: 'Number of Octocats'
-    required: false
-    default: '1'
-  octocatEyeColor:
-    description: 'Eye color of the Octocats'
-    required: true
+# inputs:
+#   numOctocats:
+#     description: 'Number of Octocats'
+#     required: false
+#     default: '1'
+#   octocatEyeColor:
+#     description: 'Eye color of the Octocats'
+#     required: true
 
 jobs:
   build:
@@ -32,4 +33,4 @@ jobs:
     - name: Run Code
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        python foo.py "${{ inputs.numOctocats }}" "${{ inputs.octocatEyeColor }}"
+        python foo.py
