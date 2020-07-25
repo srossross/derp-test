@@ -3,4 +3,4 @@ This is a Docstring
 """
 import sys
 
-print("Hello World", sys.args)
+print("Hello World", sys.argv)

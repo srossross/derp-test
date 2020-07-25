@@ -32,5 +32,4 @@ jobs:
         python-version: 3.8
     - name: Run Code
       run: |
-        # stop the build if there are Python syntax errors or undefined names
-        python foo.py
+        python foo.py "${{ inputs }}"
