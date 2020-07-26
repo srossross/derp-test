@@ -1,13 +1,9 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Python application
+name: Plantiga Playbook
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
   workflow_dispatch:
     inputs:
       logLevel:
@@ -16,15 +12,6 @@ on:
         default: 'warning'
       tags:
         description: 'Test scenario tags'
-
-# inputs:
-#   numOctocats:
-#     description: 'Number of Octocats'
-#     required: false
-#     default: '1'
-#   octocatEyeColor:
-#     description: 'Eye color of the Octocats'
-#     required: true
 
 jobs:
   build:
@@ -40,4 +27,9 @@ jobs:
     - name: Run Code
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        python foo.py "${{ github.event.inputs.logLevel }}" "${{ github.event.inputs.tags }}"
+        python foo.py "${{ github.event.inputs.logLevel }}" "${{ github.event.inputs.tags }}" > world.txt
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: output
+        path: world.txt
