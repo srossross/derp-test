@@ -9,6 +9,13 @@ on:
   pull_request:
     branches: [ master ]
   workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
 
 # inputs:
 #   numOctocats:
@@ -32,4 +39,5 @@ jobs:
         python-version: 3.8
     - name: Run Code
       run: |
-        python foo.py "${{ inputs }}"
+        # stop the build if there are Python syntax errors or undefined names
+        python foo.py "${{ github.event.inputs.logLevel }}" "${{ github.event.inputs.tags }}"
