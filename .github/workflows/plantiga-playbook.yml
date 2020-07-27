@@ -6,12 +6,11 @@ name: Plantiga Playbook
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
+      path:
+        description: 'Path to the file to execute'
         required: true
-        default: 'warning'
-      tags:
-        description: 'Test scenario tags'
+      parameters:
+        description: 'parameters to pass to the file'
 
 jobs:
   build:
@@ -27,9 +26,14 @@ jobs:
     - name: Run Code
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        python foo.py "${{ github.event.inputs.logLevel }}" "${{ github.event.inputs.tags }}" > world.txt
+        python .github/execute-plantiga-playbook.py "${{ github.event.inputs.path }}" "${{ github.event.inputs.parameters }}"
 
     - uses: actions/upload-artifact@v2
       with:
-        name: output
-        path: world.txt
+        name: log
+        path: log.txt
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: notebook
+        path: notebook.ipynb
