@@ -10,7 +10,7 @@ on:
         description: 'Path to the file to execute'
         required: true
       parameters:
-        description: 'parameters to pass to the file'
+        description: 'parameters to pass to the file. json encoded string'
 
 jobs:
   build:
@@ -25,8 +25,7 @@ jobs:
         python-version: 3.8
     - name: Run Code
       run: |
-        # stop the build if there are Python syntax errors or undefined names
-        python .github/execute-plantiga-playbook.py "${{ github.event.inputs.path }}" "${{ github.event.inputs.parameters }}"
+        python .github/execute-plantiga-playbook.py '${{ github.event.inputs.path }}' '${{ github.event.inputs.parameters }}'
 
     - uses: actions/upload-artifact@v2
       with:
